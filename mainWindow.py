@@ -8,6 +8,7 @@ from Components.calculator import CalculatorWindow
 from Components.imageCompress import ImageCompressorWindow
 from Components.game2048 import Game2048
 from Components.suduko import Suduko
+from Components.sqlServer import SQLServer
 
 # Define the main UI class
 class Ui_MainWindow(object):
@@ -57,7 +58,7 @@ class Ui_MainWindow(object):
         self.pushButton_4 = self.create_icon_button("resources/notepad_icon.png", "NotePad", "#EF9C66")
         self.pushButton_5 = self.create_icon_button("resources/suduko_icon.png", "Sudoku", "#B3D9FF")
         self.pushButton_6 = self.create_icon_button("resources/game2048_icon.png", "Image", "#FFCC99")
-        self.pushButton_7 = self.create_icon_button("resources/start.png", "Start", "#FFD700")
+        self.pushButton_7 = self.create_icon_button("resources/SQL_server_icon.png", "Start", "#FFD700")
         self.pushButton_8 = self.create_icon_button("resources/start.png", "Start", "#D3D3D3")
 
         # Add corresponding labels for the apps
@@ -67,7 +68,7 @@ class Ui_MainWindow(object):
         self.label_6 = self.create_label("NotePad", font_size=12)
         self.label_7 = self.create_label("Sudoku", font_size=12)
         self.label_8 = self.create_label("game2048", font_size=12)
-        self.label_9 = self.create_label("Start", font_size=12)
+        self.label_9 = self.create_label("SQL_Server", font_size=12)
         self.label_10 = self.create_label("Start", font_size=12)
 
         # Arrange buttons and labels in the grid layout
@@ -101,7 +102,7 @@ class Ui_MainWindow(object):
         self.pushButton_4.clicked.connect(self.open_notepad)
         self.pushButton_5.clicked.connect(self.open_sudoku)
         self.pushButton_6.clicked.connect(self.open_game2048)
-        self.pushButton_7.clicked.connect(self.open_start)
+        self.pushButton_7.clicked.connect(self.open_SQL_Server)
         self.pushButton_8.clicked.connect(self.open_start)
 
     def create_label(self, text, font_size=10):
@@ -158,9 +159,9 @@ class Ui_MainWindow(object):
         self.sudoku_window = Game2048()
         self.sudoku_window.show()
 
-    def open_image(self):
-        # Placeholder for your image-related functionality
-        pass
+    def open_SQL_Server(self):
+        self.sudoku_window = SQLServer()
+        self.sudoku_window.show()
 
     def open_start(self):
         # Placeholder for your start-related functionality
