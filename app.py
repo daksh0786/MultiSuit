@@ -1,10 +1,19 @@
-# muktisuit.py
 import sys
-from PyQt5.QtWidgets import QApplication
-from mainWindow import MainWindow
+from PyQt5.QtWidgets import QApplication, QMainWindow
+from mainWindow import Ui_MainWindow  # Import the correct Ui_MainWindow class
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    main_window = MainWindow()
-    main_window.show()
-    sys.exit(app.exec_())
+    
+    # Create an instance of QMainWindow
+    main_window = QMainWindow()  # Create the main window
+    
+    # Create an instance of Ui_MainWindow and set up the UI
+    ui = Ui_MainWindow()
+    ui.setupUi(main_window)  # Set up the UI on the main window
+    
+    main_window.show()  # Show the main window
+    
+    sys.exit(app.exec_())  # Start the Qt application event loop
+
+

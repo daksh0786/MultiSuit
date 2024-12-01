@@ -1,13 +1,7 @@
-# # -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 
 # Import necessary modules from PyQt5
 from PyQt5 import QtCore, QtGui, QtWidgets
-from Components.notepad import NotepadWindow
-from Components.imageClassifier import ClassifierWindow
-from Components.calculator import CalculatorWindow
-from Components.imageCompress import ImageCompressorWindow
-from Components.game2048 import Game2048
-from Components.suduko import Suduko
 
 # Define the main UI class
 class Ui_MainWindow(object):
@@ -50,15 +44,16 @@ class Ui_MainWindow(object):
         self.grid_layout.setVerticalSpacing(10)    # Set vertical spacing
         self.grid_layout.setContentsMargins(10, 10, 10, 10)  # Set layout margins
 
+
         # Add buttons with icons to the grid and different colors for each button
-        self.pushButton = self.create_icon_button("resources/calculator_icon.png", "Calculator", "#D0E8C5")
-        self.pushButton_2 = self.create_icon_button("resources/compressor_icon.png", "Image Compressor", "#FFE3E3")
-        self.pushButton_3 = self.create_icon_button("resources/ear_recognition.png", "Ear Recognition", "#C6E7FF")
-        self.pushButton_4 = self.create_icon_button("resources/notepad_icon.png", "NotePad", "#EF9C66")
-        self.pushButton_5 = self.create_icon_button("resources/suduko_icon.png", "Sudoku", "#B3D9FF")
-        self.pushButton_6 = self.create_icon_button("resources/game2048_icon.png", "Image", "#FFCC99")
-        self.pushButton_7 = self.create_icon_button("resources/start.png", "Start", "#FFD700")
-        self.pushButton_8 = self.create_icon_button("resources/start.png", "Start", "#D3D3D3")
+        self.pushButton = self.create_icon_button("icons/calculator.png", "Calculator", "#D0E8C5")
+        self.pushButton_2 = self.create_icon_button("icons/image_compressor.png", "Image Compressor", "#FFE3E3")
+        self.pushButton_3 = self.create_icon_button("icons/ear_recognition.png", "Ear Recognition", "#C6E7FF")
+        self.pushButton_4 = self.create_icon_button("icons/notepad.png", "NotePad", "#EF9C66")
+        self.pushButton_5 = self.create_icon_button("icons/sudoku.png", "Sudoku", "#B3D9FF")
+        self.pushButton_6 = self.create_icon_button("icons/image.png", "Image", "#FFCC99")
+        self.pushButton_7 = self.create_icon_button("icons/start.png", "Start", "#FFD700")
+        self.pushButton_8 = self.create_icon_button("icons/start.png", "Start", "#D3D3D3")
 
         # Add corresponding labels for the apps
         self.label_3 = self.create_label("Calculator", font_size=12)
@@ -66,7 +61,7 @@ class Ui_MainWindow(object):
         self.label_5 = self.create_label("Ear Recognition", font_size=12)
         self.label_6 = self.create_label("NotePad", font_size=12)
         self.label_7 = self.create_label("Sudoku", font_size=12)
-        self.label_8 = self.create_label("game2048", font_size=12)
+        self.label_8 = self.create_label("Image", font_size=12)
         self.label_9 = self.create_label("Start", font_size=12)
         self.label_10 = self.create_label("Start", font_size=12)
 
@@ -93,17 +88,7 @@ class Ui_MainWindow(object):
 
         # Connect signals and slots
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
-
-        # Connecting events to functions
-        self.pushButton.clicked.connect(self.open_calculator)
-        self.pushButton_2.clicked.connect(self.open_image_compressor)
-        self.pushButton_3.clicked.connect(self.open_classifier)
-        self.pushButton_4.clicked.connect(self.open_notepad)
-        self.pushButton_5.clicked.connect(self.open_sudoku)
-        self.pushButton_6.clicked.connect(self.open_game2048)
-        self.pushButton_7.clicked.connect(self.open_start)
-        self.pushButton_8.clicked.connect(self.open_start)
-
+    
     def create_label(self, text, font_size=10):
         """
         Helper function to create a label with customizable font size.
@@ -132,39 +117,6 @@ class Ui_MainWindow(object):
         """
         self.grid_layout.addWidget(button, row * 2, col)
         self.grid_layout.addWidget(label, row * 2 + 1, col)
-
-    # Event handlers to open windows
-    def open_calculator(self):
-        self.calc_window = CalculatorWindow()
-        self.calc_window.show()
-
-    def open_notepad(self):
-        self.notepad_window = NotepadWindow()
-        self.notepad_window.show()
-
-    def open_image_compressor(self):
-        self.image_compressor_window = ImageCompressorWindow()
-        self.image_compressor_window.show()
-
-    def open_classifier(self):
-        self.classifier_window = ClassifierWindow()
-        self.classifier_window.show()
-
-    def open_sudoku(self):
-        self.sudoku_window = Suduko()
-        self.sudoku_window.show()
-
-    def open_game2048(self):
-        self.sudoku_window = Game2048()
-        self.sudoku_window.show()
-
-    def open_image(self):
-        # Placeholder for your image-related functionality
-        pass
-
-    def open_start(self):
-        # Placeholder for your start-related functionality
-        pass
 
 
 class ResizableIconButton(QtWidgets.QPushButton):
@@ -197,3 +149,31 @@ class ResizableIconButton(QtWidgets.QPushButton):
 
         # Ensure the button has an expanding size policy
         self.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+
+    def resizeEvent(self, event):
+        """
+        Override resizeEvent to adjust icon size dynamically and make it edge-to-edge.
+        """
+        super().resizeEvent(event)
+
+        # Set icon size based on button dimensions with minimal padding
+        size = int(min(self.width() * 0.6, self.height()) * 0.6)  # 90% of button size for a thin padding
+        self.setIconSize(QtCore.QSize(size, size))
+
+
+# Main program entry point
+if __name__ == "__main__":
+    import sys
+    # Create the application object
+    app = QtWidgets.QApplication(sys.argv)
+    
+    # Create the main window
+    MainWindow = QtWidgets.QMainWindow()
+    ui = Ui_MainWindow()
+    ui.setupUi(MainWindow)
+    
+    # Display the main window
+    MainWindow.show()
+    
+    # Execute the application event loop
+    sys.exit(app.exec_())
